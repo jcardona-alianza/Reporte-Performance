@@ -106,7 +106,7 @@ const money=v=>"$"+nf.format(Math.round(v));
 const pct=v=>v==null?"—":Math.round(v*100)+"%";
 const ADS=RAW.map(r=>{const[name,grupo,mkt,g,ag,tr,cal,n4]=r;return{name,grupo,mkt,gasto:g,agendas:ag,triage:tr,calif:cal,nota4:n4,
   pctCalif:ag?cal/ag:null, cpa:ag?g/ag:null, cpq:cal?g/cal:null, win:cal>=1, drain:(ag>=3&&cal===0)};});
-const COLS=[["name","Anuncio"],["grupo","Grupo"],["mkt","Mercado"],["gasto","Gasto"],["agendas","Agendas"],["triage","Triage"],["pctCalif","% Calif"],["calif","Calif ≥3"],["nota4","Nota 4"],["cpa","Costo/agenda"],["cpq","Costo/calif"]];
+const COLS=[["name","Anuncio"],["grupo","Grupo"],["mkt","Mercado"],["gasto","Gasto"],["agendas","Agendas"],["triage","Triage"],["calif","Calif ≥3"],["pctCalif","% Calif"],["nota4","Nota 4"],["cpa","Costo/agenda"],["cpq","Costo/calif"]];
 let filt={grupo:"all",mkt:"all",only:"off"},q="",sortCol="default",sortDir=-1;
 const hrow=document.getElementById("hrow");
 COLS.forEach(([k,lbl])=>{const th=document.createElement("th");th.dataset.k=k;
@@ -144,8 +144,8 @@ function render(){
       '<td class="c"><span class="grp">'+d.grupo+'</span></td>'+
       '<td class="c">'+badge+'</td>'+
       '<td>'+money(d.gasto)+'</td><td>'+d.agendas+'</td><td>'+d.triage+'</td>'+
-      '<td class="pct'+(d.pctCalif>0?" pos":"")+'">'+pct(d.pctCalif)+'</td>'+
       '<td class="calif'+(d.calif>0?" pos":"")+'">'+d.calif+'</td>'+
+      '<td class="pct'+(d.pctCalif>0?" pos":"")+'">'+pct(d.pctCalif)+'</td>'+
       '<td class="n4'+(d.nota4>0?" pos":"")+'">'+d.nota4+'</td>'+
       '<td>'+(d.cpa==null?"—":money(d.cpa))+'</td>'+
       '<td>'+(d.cpq==null?"—":money(d.cpq))+'</td></tr>';}).join("");
