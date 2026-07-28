@@ -93,7 +93,7 @@ tbody tr.drain td{background:#F0F0F0;}
      <input class="search" id="search" placeholder="Buscar anuncio...">
    </div>
    <div class="tablescroll"><table id="tbl"><thead><tr id="hrow"></tr></thead><tbody id="tbody"></tbody></table></div>
-   <div class="note"><b>Capa 1 · Agendas</b> = atribución Meta (vida completa). <b>Capa 2 · Triage</b> = la Setter dejó pasar (Si). <b>Capa 3 · Calif ≥3</b> = nota 3–4 post-llamada. <b>% Calif</b> = triage ÷ agendas (proporción de leads que calificaron por anuncio). Costo/calificado = gasto ÷ calificados. Las capas 2–3 provienen del documento de leads (25 may–19 jul); pueden diferir levemente de la agenda de Meta por atribución. No incluye 1 lead recuperado a Tier 4 CL ni las agendas de otros países (spill). Volúmenes bajos: leer como señal direccional.</div>
+   <div class="note"><b>Capa 1 · Agendas</b> = atribución Meta (vida completa). <b>Capa 2 · Triage</b> = la Setter dejó pasar (Si). <b>Capa 3 · Calif ≥3</b> = nota 3–4 post-llamada. <b>% Calif</b> = calif ≥3 ÷ agendas (proporción de leads que calificaron por anuncio). Costo/calificado = gasto ÷ calificados. Las capas 2–3 provienen del documento de leads (25 may–19 jul); pueden diferir levemente de la agenda de Meta por atribución. No incluye 1 lead recuperado a Tier 4 CL ni las agendas de otros países (spill). Volúmenes bajos: leer como señal direccional.</div>
  </div>
 </div>
 <div class="foot"><span>Alianza · Design System v1.0</span><span>Meta Ads × Calificación · 25 may – 19 jul 2026</span></div>
@@ -105,7 +105,7 @@ const nf=new Intl.NumberFormat("es-CL");
 const money=v=>"$"+nf.format(Math.round(v));
 const pct=v=>v==null?"—":Math.round(v*100)+"%";
 const ADS=RAW.map(r=>{const[name,grupo,mkt,g,ag,tr,cal,n4]=r;return{name,grupo,mkt,gasto:g,agendas:ag,triage:tr,calif:cal,nota4:n4,
-  pctCalif:ag?tr/ag:null, cpa:ag?g/ag:null, cpq:cal?g/cal:null, win:cal>=1, drain:(ag>=3&&cal===0)};});
+  pctCalif:ag?cal/ag:null, cpa:ag?g/ag:null, cpq:cal?g/cal:null, win:cal>=1, drain:(ag>=3&&cal===0)};});
 const COLS=[["name","Anuncio"],["grupo","Grupo"],["mkt","Mercado"],["gasto","Gasto"],["agendas","Agendas"],["triage","Triage"],["pctCalif","% Calif"],["calif","Calif ≥3"],["nota4","Nota 4"],["cpa","Costo/agenda"],["cpq","Costo/calif"]];
 let filt={grupo:"all",mkt:"all",only:"off"},q="",sortCol="default",sortDir=-1;
 const hrow=document.getElementById("hrow");
