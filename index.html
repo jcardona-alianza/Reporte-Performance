@@ -45,6 +45,7 @@ th:hover{background:#222;}th .ar{font-size:.6rem;opacity:.7;margin-left:1px;}
 td{padding:8px 9px;border-top:1px solid var(--border);text-align:right;white-space:nowrap;font-weight:500;}
 tbody tr:nth-child(even) td{background:var(--bg-soft);}
 td.name{text-align:left;font-weight:700;color:var(--navy);}
+td.pct{font-weight:700;color:var(--mute);}td.pct.pos{color:var(--blue);}
 td.calif{font-weight:800;}td.calif.pos{color:var(--orange);}
 td.n4{font-weight:800;}td.n4.pos{color:var(--violet);}
 .badge{font-size:.66rem;font-weight:700;padding:2px 9px;border-radius:var(--r-full);letter-spacing:.02em;}
@@ -92,7 +93,7 @@ tbody tr.drain td{background:#F0F0F0;}
      <input class="search" id="search" placeholder="Buscar anuncio...">
    </div>
    <div class="tablescroll"><table id="tbl"><thead><tr id="hrow"></tr></thead><tbody id="tbody"></tbody></table></div>
-   <div class="note"><b>Capa 1 · Agendas</b> = atribución Meta (vida completa). <b>Capa 2 · Triage</b> = la Setter dejó pasar (Si). <b>Capa 3 · Calif ≥3</b> = nota 3–4 post-llamada. Costo/calificado = gasto ÷ calificados. Las capas 2–3 provienen del documento de leads (25 may–19 jul); pueden diferir levemente de la agenda de Meta por atribución. No incluye 1 lead recuperado a Tier 4 CL ni las agendas de otros países (spill). Volúmenes bajos: leer como señal direccional.</div>
+   <div class="note"><b>Capa 1 · Agendas</b> = atribución Meta (vida completa). <b>Capa 2 · Triage</b> = la Setter dejó pasar (Si). <b>Capa 3 · Calif ≥3</b> = nota 3–4 post-llamada. <b>% Calif</b> = triage ÷ agendas (proporción de leads que calificaron por anuncio). Costo/calificado = gasto ÷ calificados. Las capas 2–3 provienen del documento de leads (25 may–19 jul); pueden diferir levemente de la agenda de Meta por atribución. No incluye 1 lead recuperado a Tier 4 CL ni las agendas de otros países (spill). Volúmenes bajos: leer como señal direccional.</div>
  </div>
 </div>
 <div class="foot"><span>Alianza · Design System v1.0</span><span>Meta Ads × Calificación · 25 may – 19 jul 2026</span></div>
@@ -102,9 +103,10 @@ tbody tr.drain td{background:#F0F0F0;}
 const RAW=[["2607_Video 1", "Nuevos", "MX", 225616, 2, 0, 0, 0], ["2607_Video 9", "Nuevos", "MX", 219003, 4, 1, 1, 0], ["2607_Video 8", "Nuevos", "MX", 37621, 1, 0, 0, 0], ["2607_Video 6", "Nuevos", "MX", 15133, 1, 0, 0, 0], ["2607_Video 4", "Nuevos", "MX", 34102, 0, 0, 0, 0], ["2607_Video 7", "Nuevos", "MX", 27603, 0, 0, 0, 0], ["2607_Video 5", "Nuevos", "MX", 20656, 0, 0, 0, 0], ["2607_Video 3", "Nuevos", "MX", 18866, 0, 0, 0, 0], ["2607_Video 2", "Nuevos", "MX", 9940, 0, 0, 0, 0], ["2607_Video 9", "Nuevos", "CL", 515126, 3, 1, 1, 0], ["2607_Video 1", "Nuevos", "CL", 156818, 1, 0, 0, 0], ["2607_Video 8", "Nuevos", "CL", 47825, 1, 0, 0, 0], ["2607_Video 3", "Nuevos", "CL", 26051, 0, 0, 0, 0], ["2607_Video 6", "Nuevos", "CL", 25183, 0, 0, 0, 0], ["2607_Video 2", "Nuevos", "CL", 25758, 0, 0, 0, 0], ["2607_Video 5", "Nuevos", "CL", 23191, 0, 0, 0, 0], ["2607_Video 7", "Nuevos", "CL", 14006, 0, 0, 0, 0], ["2607_Video 4", "Nuevos", "CL", 13873, 0, 0, 0, 0], ["CuriososVsPacientes", "Legacy", "MX", 3344478, 24, 8, 6, 4], ["4A0226_H3", "Legacy", "MX", 1416248, 10, 0, 0, 0], ["SistemaAlianza", "Legacy", "MX", 842629, 3, 2, 2, 1], ["IMG8A0326", "Legacy", "MX", 799161, 6, 0, 0, 0], ["Hook3 - MX", "Legacy", "MX", 558408, 9, 1, 1, 1], ["Hook2 - Copia", "Legacy", "MX", 353707, 0, 0, 0, 0], ["2A0226_H3", "Legacy", "MX", 288617, 0, 0, 0, 0], ["IMG9A0326", "Legacy", "MX", 272341, 4, 0, 0, 0], ["5A0226_H3", "Legacy", "MX", 198772, 1, 0, 0, 0], ["1A0226-H1", "Legacy", "MX", 156942, 1, 1, 1, 1], ["EntrevistaCalle", "Legacy", "MX", 123779, 0, 0, 0, 0], ["Hook1 - Copia", "Legacy", "MX", 60199, 0, 0, 0, 0], ["Hook5 - Copia", "Legacy", "MX", 57557, 0, 0, 0, 0], ["SA_DEMO", "Legacy", "MX", 54871, 1, 0, 0, 0], ["Hook4 - Copia", "Legacy", "MX", 46454, 0, 0, 0, 0], ["3A0226-H1", "Legacy", "MX", 19453, 0, 0, 0, 0], ["CuriososVsPacientes", "Legacy", "CL", 2899003, 11, 2, 2, 1], ["EntrevistaCalle", "Legacy", "CL", 1803783, 1, 0, 0, 0], ["Hook3 - Copia", "Legacy", "CL", 815299, 0, 0, 0, 0], ["Hook2 - Copia", "Legacy", "CL", 814020, 5, 1, 1, 0], ["SistemaAlianza", "Legacy", "CL", 592225, 5, 2, 2, 0], ["SA_DEMO", "Legacy", "CL", 543192, 3, 2, 2, 2], ["2A0226_H3", "Legacy", "CL", 335096, 2, 0, 0, 0], ["Hook1 - Copia", "Legacy", "CL", 196235, 2, 0, 0, 0], ["Hook4 - Copia", "Legacy", "CL", 182717, 1, 1, 1, 0], ["IMG8A0326", "Legacy", "CL", 107998, 0, 0, 0, 0], ["IMG9A0326", "Legacy", "CL", 86634, 0, 0, 0, 0], ["Hook5 - Copia", "Legacy", "CL", 42263, 0, 0, 0, 0], ["4A0226_H3", "Legacy", "CL", 39938, 0, 0, 0, 0], ["3A0226-H1", "Legacy", "CL", 34047, 0, 0, 0, 0], ["1A0226-H1", "Legacy", "CL", 13728, 0, 0, 0, 0], ["5A0226_H3", "Legacy", "CL", 5656, 0, 0, 0, 0]];
 const nf=new Intl.NumberFormat("es-CL");
 const money=v=>"$"+nf.format(Math.round(v));
+const pct=v=>v==null?"—":Math.round(v*100)+"%";
 const ADS=RAW.map(r=>{const[name,grupo,mkt,g,ag,tr,cal,n4]=r;return{name,grupo,mkt,gasto:g,agendas:ag,triage:tr,calif:cal,nota4:n4,
-  cpa:ag?g/ag:null, cpq:cal?g/cal:null, win:cal>=1, drain:(ag>=3&&cal===0)};});
-const COLS=[["name","Anuncio"],["grupo","Grupo"],["mkt","Mercado"],["gasto","Gasto"],["agendas","Agendas"],["triage","Triage"],["calif","Calif ≥3"],["nota4","Nota 4"],["cpa","Costo/agenda"],["cpq","Costo/calif"]];
+  pctCalif:ag?tr/ag:null, cpa:ag?g/ag:null, cpq:cal?g/cal:null, win:cal>=1, drain:(ag>=3&&cal===0)};});
+const COLS=[["name","Anuncio"],["grupo","Grupo"],["mkt","Mercado"],["gasto","Gasto"],["agendas","Agendas"],["triage","Triage"],["pctCalif","% Calif"],["calif","Calif ≥3"],["nota4","Nota 4"],["cpa","Costo/agenda"],["cpq","Costo/calif"]];
 let filt={grupo:"all",mkt:"all",only:"off"},q="",sortCol="default",sortDir=-1;
 const hrow=document.getElementById("hrow");
 COLS.forEach(([k,lbl])=>{const th=document.createElement("th");th.dataset.k=k;
@@ -123,6 +125,7 @@ function current(){
   }
   a.sort((x,y)=>{let vx=x[sortCol],vy=y[sortCol];
     if(sortCol==="cpa"||sortCol==="cpq"){vx=vx==null?Infinity:vx;vy=vy==null?Infinity:vy;}
+    if(sortCol==="pctCalif"){vx=vx==null?-1:vx;vy=vy==null?-1:vy;}
     if(typeof vx==="string")return vx.localeCompare(vy)*sortDir;return(vx-vy)*sortDir;});
   return a;}
 function kpis(a){
@@ -141,6 +144,7 @@ function render(){
       '<td class="c"><span class="grp">'+d.grupo+'</span></td>'+
       '<td class="c">'+badge+'</td>'+
       '<td>'+money(d.gasto)+'</td><td>'+d.agendas+'</td><td>'+d.triage+'</td>'+
+      '<td class="pct'+(d.pctCalif>0?" pos":"")+'">'+pct(d.pctCalif)+'</td>'+
       '<td class="calif'+(d.calif>0?" pos":"")+'">'+d.calif+'</td>'+
       '<td class="n4'+(d.nota4>0?" pos":"")+'">'+d.nota4+'</td>'+
       '<td>'+(d.cpa==null?"—":money(d.cpa))+'</td>'+
